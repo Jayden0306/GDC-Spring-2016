@@ -14,11 +14,9 @@ public class EnemySpawn : MonoBehaviour {
         //InvokeRepeating("Spawn", spawnTime, Random.Range(2, 6));
 	}
 	
-    IEnumerator Spawn ()
-    {
+    IEnumerator Spawn () {
         yield return new WaitForSeconds(spawnTime);
-            for (int i = enemyCount; i >= 0; i--)
-            {
+            for (int i = enemyCount; i >= 0; i--) {
                 Instantiate(enemy, transform.position, enemy.transform.rotation);
                 yield return new WaitForSeconds(Random.Range(.1f, 3));
             }   
