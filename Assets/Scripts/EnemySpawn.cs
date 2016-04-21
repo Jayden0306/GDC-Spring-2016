@@ -4,7 +4,8 @@ using System.Collections;
 public class EnemySpawn : MonoBehaviour {
 
     public GameObject enemy;
-    public float spawnTime;
+    public float minSpawnTime;
+    public float maxSpawnTime;
     public int enemyCount;
     //public Transform spawn;
 
@@ -15,10 +16,10 @@ public class EnemySpawn : MonoBehaviour {
 	}
 	
     IEnumerator Spawn () {
-        yield return new WaitForSeconds(spawnTime);
+        yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
             for (int i = enemyCount; i >= 0; i--) {
                 Instantiate(enemy, transform.position, enemy.transform.rotation);
-                yield return new WaitForSeconds(Random.Range(.1f, 3));
+                yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
             }   
     }
 }
