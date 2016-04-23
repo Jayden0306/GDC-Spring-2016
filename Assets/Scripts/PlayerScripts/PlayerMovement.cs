@@ -9,9 +9,6 @@ public class PlayerMovement : MonoBehaviour {
     public float spacesToTheRight;
     public float laneWidth;
 
-    //Bullet
-    public GameObject bullet;
-    public Transform shotSpawn;
     
     //Player movement
     private CharacterController controller;
@@ -26,11 +23,6 @@ public class PlayerMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //for the bullet instantiation
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Instantiate(bullet, shotSpawn.position, shotSpawn.rotation);
-        }
         //controller.SimpleMove(new Vector3(0, 0, Input.GetAxis("Vertical")) * speed);
 
         if (Input.GetKeyDown(KeyCode.W) && position < spacesToTheLeft)
