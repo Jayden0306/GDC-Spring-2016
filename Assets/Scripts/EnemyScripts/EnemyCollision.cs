@@ -3,6 +3,8 @@ using System.Collections;
 
 public class EnemyCollision : MonoBehaviour {
 
+    public int enemyScore = 10;
+
     void OnCollisionEnter(Collision collision)
     {
         //if the object you are colliding with has the tag "Obst"
@@ -10,6 +12,7 @@ public class EnemyCollision : MonoBehaviour {
         //collided with the obstacle.)
         if (collision.gameObject.tag == "Bullet")
         {
+            ScoreManager.score += enemyScore;
             Destroy(this.gameObject);
         }
     }
