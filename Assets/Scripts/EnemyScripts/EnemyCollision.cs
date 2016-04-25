@@ -13,6 +13,7 @@ public class EnemyCollision : MonoBehaviour {
         if (collision.gameObject.tag == "Bullet")
         {
             ScoreManager.score += enemyScore;
+            ScoreManager.enemyCount--;
             Destroy(this.gameObject);
         }
     }
@@ -21,6 +22,7 @@ public class EnemyCollision : MonoBehaviour {
     {
         if (other.gameObject.tag == "Finish")
         {
+            ScoreManager.enemyCount--;
             Destroy(this.gameObject);
         }
     }

@@ -5,17 +5,21 @@ using UnityEngine.UI;
 public class ScoreManager : MonoBehaviour {
 
     public static int score;
+    public static int enemyCount = 60;
 
-    Text text;
+    public Text playerScore;
+    public Text enemiesLeft;
 
 	// Use this for initialization
 	void Awake () {
         score = 0;
-        text = GetComponent<Text>();
+        //playerScore = GetComponent<Text>();
+        //enemiesLeft = GetComponent<Text>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        text.text = "Score: " + score;
+        playerScore.text = "Score: " + score;
+        enemiesLeft.text = "Enemies Remaining: " + enemyCount;
 	}
 }

@@ -12,6 +12,7 @@ public class EnemySpawn : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         StartCoroutine (Spawn());
+        enemyCount = ScoreManager.enemyCount / 3;
         //InvokeRepeating("Spawn", spawnTime, Random.Range(2, 6));
 	}
 	
