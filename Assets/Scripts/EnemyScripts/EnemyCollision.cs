@@ -4,6 +4,7 @@ using System.Collections;
 public class EnemyCollision : MonoBehaviour {
 
     public int enemyScore = 10;
+	public GameObject myExplosion;
 
     void OnCollisionEnter(Collision collision)
     {
@@ -12,6 +13,7 @@ public class EnemyCollision : MonoBehaviour {
         //collided with the obstacle.)
         if (collision.gameObject.tag == "Bullet")
         {
+			Instantiate (myExplosion, transform.position, transform.rotation);
             ScoreManager.score += enemyScore;
             ScoreManager.enemyCount--;
             Destroy(this.gameObject);
