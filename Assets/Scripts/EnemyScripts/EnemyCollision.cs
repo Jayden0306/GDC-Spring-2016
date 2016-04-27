@@ -13,7 +13,8 @@ public class EnemyCollision : MonoBehaviour {
         //collided with the obstacle.)
         if (collision.gameObject.tag == "Bullet")
         {
-			Instantiate (myExplosion, transform.position, transform.rotation);
+			GameObject newExplosion = (GameObject)Instantiate (myExplosion, transform.position, transform.rotation);
+			Destroy (newExplosion, 0.3f);
             ScoreManager.score += enemyScore;
             ScoreManager.enemyCount--;
             Destroy(this.gameObject);
