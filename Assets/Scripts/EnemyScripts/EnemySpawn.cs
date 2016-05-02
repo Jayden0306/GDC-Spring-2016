@@ -18,7 +18,7 @@ public class EnemySpawn : MonoBehaviour {
 	
     IEnumerator Spawn () {
         yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
-            for (int i = enemyCount; i >= 0; i--) {
+            for (int i = enemyCount; i > 0; i--) {
                 // this line will choose a random enemy from the enemy array.
                 GameObject tempEnemy = enemy[Random.Range(0, enemy.Length)];
                 Instantiate(tempEnemy, transform.position, transform.rotation);

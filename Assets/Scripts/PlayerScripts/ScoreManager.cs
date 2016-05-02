@@ -4,14 +4,17 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour {
 
+    public int publicEnemyCount;
+
     public static int score;
-    public static int enemyCount = 60;
+    public static int enemyCount;
 
     public Text playerScore;
     public Text enemiesLeft;
 
 	// Use this for initialization
 	void Awake () {
+        enemyCount = publicEnemyCount;
         score = 0;
         //playerScore = GetComponent<Text>();
         //enemiesLeft = GetComponent<Text>();
