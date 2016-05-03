@@ -6,8 +6,8 @@ public class ScoreManager : MonoBehaviour {
 
     public int publicEnemyCount;
 
-    public static int score;
-    public static int enemyCount;
+    private int score;
+    private int enemyCount;
 
     public Text playerScore;
     public Text enemiesLeft;
@@ -19,10 +19,33 @@ public class ScoreManager : MonoBehaviour {
         //playerScore = GetComponent<Text>();
         //enemiesLeft = GetComponent<Text>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    public int GetScore()
+    {
+        return score;
+    }
+
+    public void SetScore(int theScore)
+    {
+        score = theScore;
         playerScore.text = "Score: " + score;
+    }
+
+    public void AddScore(int theScore)
+    {
+        score += theScore;
+        playerScore.text = "Score: " + score;
+    }
+
+    public void SetEnemyCount(int theEnemyCount)
+    {
+        enemyCount = theEnemyCount;
         enemiesLeft.text = "Enemies Remaining: " + enemyCount;
-	}
+    }
+
+    public void AddEnemyCount(int theCount)
+    {
+        enemyCount += theCount;
+        enemiesLeft.text = "Enemies Remaining: " + enemyCount;
+    }
 }

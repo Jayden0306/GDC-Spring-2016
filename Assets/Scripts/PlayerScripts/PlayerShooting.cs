@@ -31,7 +31,7 @@ public class PlayerShooting : MonoBehaviour {
 
         if (Physics.Raycast(shotRay, out hit, Mathf.Infinity, layerMask)) {
             armRotation = Mathf.Atan2(hit.point.y-shotSpawn.transform.position.y, hit.point.x - shotSpawn.transform.position.x) * Mathf.Rad2Deg;
-            Debug.Log(hit.point.ToString() + " : " + armRotation);
+            //Debug.Log(hit.point.ToString() + " : " + armRotation);
         }
     }
 

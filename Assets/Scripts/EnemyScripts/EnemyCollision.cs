@@ -5,6 +5,14 @@ public class EnemyCollision : MonoBehaviour {
 
     public int enemyScore = 10;
 	public GameObject myExplosion;
+    public GameObject gameManager;
+
+    private ScoreManager scoreManager;
+
+    void Awake()
+    {
+        scoreManager = gameManager.GetComponent<ScoreManager>();
+    }
 
     void OnCollisionEnter(Collision collision)
     {
@@ -15,8 +23,8 @@ public class EnemyCollision : MonoBehaviour {
         {
 			GameObject newExplosion = (GameObject)Instantiate (myExplosion, transform.position, transform.rotation);
 			Destroy (newExplosion, 0.3f);
-            ScoreManager.score += enemyScore;
-            ScoreManager.enemyCount--;
+            scoreManager.AddScore(enemyScore);
+            scoreManager.AddEnemyCount(-1);
             Destroy(this.gameObject);
         }
     }
@@ -25,7 +33,7 @@ public class EnemyCollision : MonoBehaviour {
     {
         if (other.gameObject.tag == "Finish")
         {
-            ScoreManager.enemyCount--;
+            scoreManager.AddEnemyCount(-1);
             Destroy(this.gameObject);
         }
     }
