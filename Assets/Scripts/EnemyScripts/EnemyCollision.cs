@@ -8,10 +8,12 @@ public class EnemyCollision : MonoBehaviour {
     public GameObject gameManager;
 
     private ScoreManager scoreManager;
+    private PowerUpManager powerupManager;
 
     void Awake()
     {
         scoreManager = gameManager.GetComponent<ScoreManager>();
+        powerupManager = gameManager.GetComponent<PowerUpManager>();
     }
 
     void OnCollisionEnter(Collision collision)
@@ -24,6 +26,7 @@ public class EnemyCollision : MonoBehaviour {
 			GameObject newExplosion = (GameObject)Instantiate (myExplosion, transform.position, transform.rotation);
 			Destroy (newExplosion, 0.3f);
             scoreManager.AddScore(enemyScore);
+            powerupManager.EnemyDeath(transform);
             scoreManager.AddEnemyCount(-1);
             Destroy(this.gameObject);
         }
