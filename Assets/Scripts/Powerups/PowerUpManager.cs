@@ -25,8 +25,8 @@ public class PowerUpManager : MonoBehaviour {
     {
         if (Random.value < powerupFrequency)
         {
-            //powerups[Random.Range(0, powerups.Length - 1)].ActivatePowerUp();
-            powerups[0].CreateTarget(location);
+            int choice = Random.Range(0, powerups.Length);
+            powerups[choice].CreateTarget(location);
         }
     }
 

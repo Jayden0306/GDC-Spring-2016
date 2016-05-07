@@ -4,6 +4,7 @@ using System.Collections;
 public abstract class AbstractPowerUp : MonoBehaviour {
 
     public int durration;
+    public GameObject targetTrigger;
 
     // the time when the current powerup ends
     private float endTime;
@@ -47,9 +48,12 @@ public abstract class AbstractPowerUp : MonoBehaviour {
     {
         return activated;
     }
-
-    //Create the target we will aim at to activate the powerup at the given position
-    public abstract void CreateTarget(Transform thePostion);
+    
+    public void CreateTarget(Transform thePostion)
+    {
+        targetTrigger.GetComponent<PowerupTarget>().source = this;
+        Instantiate(targetTrigger, thePostion.position, thePostion.rotation);
+    }
 
     //Run when the powerup initially starts
     protected abstract void PowerUpStart();
