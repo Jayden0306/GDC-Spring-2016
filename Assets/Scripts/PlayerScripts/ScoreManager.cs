@@ -16,8 +16,8 @@ public class ScoreManager : MonoBehaviour {
 	void Awake () {
         enemyCount = publicEnemyCount;
         score = 0;
-        //playerScore = GetComponent<Text>();
-        //enemiesLeft = GetComponent<Text>();
+        SetScore(score);
+        SetEnemyCount(enemyCount);
 	}
 
     public int GetScore()
