@@ -6,12 +6,21 @@ public class PlayerShooting : MonoBehaviour {
     public GameObject bullet;
     public Transform shotSpawn;
     public AudioClip bulletShot;
+    public GameObject sprite;
 
     public float shotDelay = 2f;
     float shotTimer = 0f;
 
     float armRotation = 0;
-       
+    
+    void Start()
+    {
+        if (sprite != null)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+    }
 
 	// Update is called once per frame
     void Update () {
@@ -33,6 +42,7 @@ public class PlayerShooting : MonoBehaviour {
 
         if (Physics.Raycast(shotRay, out hit, Mathf.Infinity, layerMask)) {
             armRotation = Mathf.Atan2(hit.point.y-shotSpawn.transform.position.y, hit.point.x - shotSpawn.transform.position.x) * Mathf.Rad2Deg;
+            sprite.transform.position = hit.point;
             //Debug.Log(hit.point.ToString() + " : " + armRotation);
         }
     }
