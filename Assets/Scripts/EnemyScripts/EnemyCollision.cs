@@ -7,6 +7,10 @@ public class EnemyCollision : MonoBehaviour {
 	public GameObject myExplosion;
     public GameObject gameManager;
 
+
+    public AudioClip enemyDeathSound;
+    private AudioSource enemyDeath;
+
     private ScoreManager scoreManager;
     private PowerUpManager powerupManager;
     private PlayerHealth damageDone;
@@ -16,6 +20,7 @@ public class EnemyCollision : MonoBehaviour {
         scoreManager = gameManager.GetComponent<ScoreManager>();
         powerupManager = gameManager.GetComponent<PowerUpManager>();
         damageDone = gameManager.GetComponent<PlayerHealth>();
+        enemyDeath = GetComponent<AudioSource>();
     }
 
     void OnCollisionEnter(Collision collision)
@@ -27,6 +32,7 @@ public class EnemyCollision : MonoBehaviour {
         {
 			GameObject newExplosion = (GameObject)Instantiate (myExplosion, transform.position, transform.rotation);
 			Destroy (newExplosion, 0.3f);
+            AudioSource.PlayClipAtPoint(enemyDeathSound, this.transform.position);
             scoreManager.AddScore(enemyScore);
             powerupManager.EnemyDeath(transform);
             scoreManager.AddEnemyCount(-1);

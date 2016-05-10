@@ -5,6 +5,7 @@ public class PlayerShooting : MonoBehaviour {
     //Bullet
     public GameObject bullet;
     public Transform shotSpawn;
+    public AudioClip bulletShot;
 
     public float shotDelay = 2f;
     float shotTimer = 0f;
@@ -18,6 +19,7 @@ public class PlayerShooting : MonoBehaviour {
         //for the bullet instantiation
         if (Input.GetButtonDown("Fire1") && shotTimer <= 0) {
             GameObject newBullet = (GameObject)Instantiate(bullet, shotSpawn.position, Quaternion.identity);
+            AudioSource.PlayClipAtPoint(bulletShot, this.transform.position);
             newBullet.transform.Rotate(0, 0, armRotation-90);
             shotTimer = shotDelay;
         }
