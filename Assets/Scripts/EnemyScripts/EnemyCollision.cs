@@ -9,11 +9,13 @@ public class EnemyCollision : MonoBehaviour {
 
     private ScoreManager scoreManager;
     private PowerUpManager powerupManager;
+    private PlayerHealth damageDone;
 
     void Awake()
     {
         scoreManager = gameManager.GetComponent<ScoreManager>();
         powerupManager = gameManager.GetComponent<PowerUpManager>();
+        damageDone = gameManager.GetComponent<PlayerHealth>();
     }
 
     void OnCollisionEnter(Collision collision)
@@ -36,6 +38,7 @@ public class EnemyCollision : MonoBehaviour {
     {
         if (other.gameObject.tag == "Finish")
         {
+            damageDone.ReduceHealth(10f);
             scoreManager.AddEnemyCount(-1);
             Destroy(this.gameObject);
         }
