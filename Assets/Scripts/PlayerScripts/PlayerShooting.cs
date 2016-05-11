@@ -6,7 +6,7 @@ public class PlayerShooting : MonoBehaviour {
     public GameObject bullet;
     public Transform shotSpawn;
     public AudioClip bulletShot;
-    public GameObject cursorSprite;
+    public Texture2D cursorTexture;
 
     public float shotDelay = 2f;
     float shotTimer = 0f;
@@ -26,11 +26,9 @@ public class PlayerShooting : MonoBehaviour {
     void Start()
     {
         canShoot = true;
-        if (cursorSprite != null)
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Confined;
-        }
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+ 
     }
 
 	// Update is called once per frame
@@ -57,8 +55,6 @@ public class PlayerShooting : MonoBehaviour {
 
         if (Physics.Raycast(shotRay, out hit, Mathf.Infinity, layerMask)) {
             armRotation = Mathf.Atan2(hit.point.y-shotSpawn.transform.position.y, hit.point.x - shotSpawn.transform.position.x) * Mathf.Rad2Deg;
-            if (cursorSprite)
-                cursorSprite.transform.position = hit.point;
             //Debug.Log(hit.point.ToString() + " : " + armRotation);
         }
     }

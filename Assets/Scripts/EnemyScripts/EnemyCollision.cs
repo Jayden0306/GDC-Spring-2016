@@ -4,6 +4,7 @@ using System.Collections;
 public class EnemyCollision : MonoBehaviour {
 
     public int enemyScore = 10;
+    public float damageOnImpact = 10f;
 	public GameObject myExplosion;
     public GameObject gameManager;
 
@@ -44,7 +45,7 @@ public class EnemyCollision : MonoBehaviour {
     {
         if (other.gameObject.tag == "Finish")
         {
-            damageDone.ReduceHealth(10f);
+            damageDone.ReduceHealth(damageOnImpact);
             scoreManager.AddEnemyCount(-1);
             Destroy(this.gameObject);
         }
