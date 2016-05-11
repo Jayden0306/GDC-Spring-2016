@@ -1,27 +1,81 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 public class EnemyWave {
-    public float Duration = 0;
     public int[] numSpawns;
     GameObject[] enemyArray;
-    float[] enemyDifficulty;
-    private float baseTimeBetweenSpawns = 0;
+    float timeBetweenSpawns = 10;
+    float currentSpawnTime = 0;
+    int numEnemiesPerSpawn = 1;
+    int curSpawns = 0;
+    int initialNumEnemies = 10;
 
-    public EnemyWave(float Difficulty, int enemyFocus, GameObject[] enemies, float[] enemyDifficulties) {
+    public int getEnemiesRemaining() {
+        int i = 0;
+        foreach (int enemy in numSpawns) {
+            i+=enemy;
+        }
+        return i;
+    }
+
+    public int totalEnemies = 0;
+
+    public EnemyWave(int Difficulty, int enemyFocus, GameObject[] enemies) {
         // Store internal copies inside the wave object.
         enemyArray = enemies;
-        enemyDifficulty = enemyDifficulties;
 
         GenerateWave(Difficulty, enemyFocus);
     }
 
     public GameObject spawnEnemy() {
-        //return Instantiate(tempEnemy, transform.position, transform.rotation);
-        return null;
+        if (curSpawns > 0) {
+            curSpawns--;
+            int enemy = Random.Range(0, enemyArray.Length);
+            while (numSpawns[enemy] <= 0)
+                enemy = Random.Range(0, enemyArray.Length);
+            numSpawns[enemy]--;
+
+            return (GameObject)GameObject.Instantiate(enemyArray[enemy], Vector3.zero, Quaternion.identity);
+        } else
+        //return Instantiate(, transform.position, transform.rotation);
+            return null;
     }
 
-    void GenerateWave(float Difficulty, int enemyFocus) {
+    void GenerateWave(int Difficulty, int enemyFocus) {
+        // Ratios as follows:
+        //  80% focused
+        //  Remained: Random between the others
 
+        int enemyCount = totalEnemies = initialNumEnemies + Difficulty;
+        numSpawns = new int[enemyArray.Length];
+
+        while (enemyCount > 0) {
+            for (int i = 0; i < enemyArray.Length; i++) {
+                float Percent = Random.Range(0.0f, 100f);
+                if (Percent < 80 && i == enemyFocus) {
+                    numSpawns[i]++;
+                } else if (Percent >= 80 && i != enemyFocus) {
+                    numSpawns[i]++;
+                }
+            }
+            enemyCount--;
+        }
+
+        numEnemiesPerSpawn = 1 + (int)(Difficulty / 2);
+
+        timeBetweenSpawns = 5 / Mathf.Sqrt(Difficulty);
+        Debug.Log(Difficulty.ToString() + ":" + timeBetweenSpawns.ToString());
+    }
+
+    public bool Update() {
+        currentSpawnTime -= Time.deltaTime;
+        if (currentSpawnTime <= 0) {
+            currentSpawnTime = timeBetweenSpawns;
+            curSpawns = numEnemiesPerSpawn;
+        }
+        if (getEnemiesRemaining() == 0)
+            return false;
+        else
+            return true;
     }
 }

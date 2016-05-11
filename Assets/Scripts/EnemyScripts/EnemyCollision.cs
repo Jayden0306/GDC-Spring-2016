@@ -18,6 +18,7 @@ public class EnemyCollision : MonoBehaviour {
 
     void Awake()
     {
+        gameManager = GameObject.FindWithTag("GameController");
         scoreManager = gameManager.GetComponent<ScoreManager>();
         powerupManager = gameManager.GetComponent<PowerUpManager>();
         damageDone = gameManager.GetComponent<PlayerHealth>();
