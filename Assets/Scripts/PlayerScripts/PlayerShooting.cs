@@ -11,19 +11,33 @@ public class PlayerShooting : MonoBehaviour {
     float shotTimer = 0f;
 
     float armRotation = 0;
-       
+    private bool canShoot;
+
+    public bool GetCanShoot()
+    {
+        return canShoot;
+    }
+
+    public void SetCanShoot(bool value)
+    {
+        canShoot = value;
+    }
 
 	// Update is called once per frame
     void Update () {
-        SetShotAngle();
-        //for the bullet instantiation
-        if (Input.GetButtonDown("Fire1") && shotTimer <= 0) {
-            GameObject newBullet = (GameObject)Instantiate(bullet, shotSpawn.position, Quaternion.identity);
-            AudioSource.PlayClipAtPoint(bulletShot, this.transform.position);
-            newBullet.transform.Rotate(0, 0, armRotation-90);
-            shotTimer = shotDelay;
-        }
-        shotTimer -= Time.deltaTime;
+        if (canShoot)
+        {
+            SetShotAngle();
+            //for the bullet instantiation
+            if (Input.GetButtonDown("Fire1") && shotTimer <= 0)
+            {
+                GameObject newBullet = (GameObject)Instantiate(bullet, shotSpawn.position, Quaternion.identity);
+                AudioSource.PlayClipAtPoint(bulletShot, this.transform.position);
+                newBullet.transform.Rotate(0, 0, armRotation - 90);
+                shotTimer = shotDelay;
+            }
+            shotTimer -= Time.deltaTime;
+        }        
 	}
 
     void SetShotAngle() {

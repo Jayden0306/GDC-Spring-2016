@@ -5,18 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class UIManagerScript : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-	public void StartGame() {
-		SceneManager.LoadScene ("Main");
+	public void StartGame(string sceneName) {
+		SceneManager.LoadScene (sceneName);
 	}
 
 	public void QuitGame() {
