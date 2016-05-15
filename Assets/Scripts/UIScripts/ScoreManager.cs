@@ -14,7 +14,7 @@ public class ScoreManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        enemyCount = publicEnemyCount;
+        //enemyCount = publicEnemyCount;
         score = 0;
         SetScore(score);
         SetEnemyCount(enemyCount);

@@ -12,12 +12,17 @@ public class EnemyWaveController : MonoBehaviour {
     public int[] FocusPattern;
     private int currentFocus;
 
+    public GameObject gameManager;
+    private ScoreManager enemyCount;
+
     private int currentDifficulty = 0;
 
     private EnemyWave activeWave;
 
 
     void Awake() {
+        enemyCount = gameManager.GetComponent<ScoreManager>();
+
         // Grab all our children for spawn locations
         spawnLocations = new Vector3[transform.childCount];
         int i = 0;
@@ -57,6 +62,8 @@ public class EnemyWaveController : MonoBehaviour {
             }
     
         }
+
+        enemyCount.SetEnemyCount(GetEnemiesRemaining());
     }
 
     public int GetEnemiesRemaining() {
