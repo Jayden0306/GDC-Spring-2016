@@ -15,6 +15,8 @@ public class EnemyWaveController : MonoBehaviour {
     public GameObject gameManager;
     private ScoreManager enemyCount;
 
+    private AudioSource waveStart; 
+
     private int currentDifficulty = 0;
 
     private EnemyWave activeWave;
@@ -22,7 +24,7 @@ public class EnemyWaveController : MonoBehaviour {
 
     void Awake() {
         enemyCount = gameManager.GetComponent<ScoreManager>();
-
+        waveStart = gameManager.GetComponent<AudioSource>();
         // Grab all our children for spawn locations
         spawnLocations = new Vector3[transform.childCount];
         int i = 0;
@@ -44,6 +46,7 @@ public class EnemyWaveController : MonoBehaviour {
         internalTimer -= Time.deltaTime;
         if (internalTimer <= 0f) {
             if (activeWave == null) {
+                waveStart.PlayDelayed(0f);
                 activeWave = new EnemyWave(currentDifficulty, FocusPattern[currentFocus], enemyArray);
             }  else {
                 GameObject newEnemy = activeWave.spawnEnemy();
