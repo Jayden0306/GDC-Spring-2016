@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 1eb61282c8bb9b8468a71b99cd20cb4d
-timeCreated: 1462858656
+guid: 54466ad03a4093848a10c5772103e8af
+timeCreated: 1463428594
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -10,8 +10,6 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: Cube
-    7400000: Default Take
-    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -70,7 +68,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
