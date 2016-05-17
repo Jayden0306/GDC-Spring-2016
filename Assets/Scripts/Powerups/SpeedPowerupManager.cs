@@ -27,4 +27,6 @@ public class SpeedPowerupManager : AbstractPowerUp {
     {
         movement.speed = baseMoveSpeed;
     }
+    
+    protected override void PowerupUpdate() { }
 }

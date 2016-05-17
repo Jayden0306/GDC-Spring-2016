@@ -20,11 +20,16 @@ public abstract class AbstractPowerUp : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	    if (activated && endTime < Time.time)
+	protected void Update () {
+	    if (activated)
         {
-            activated = false;
-            PowerUpEnd();
+            if (endTime < Time.time) {
+                activated = false;
+                PowerUpEnd();
+            } else
+            {
+                PowerupUpdate();
+            }
         } 
 	}
 
@@ -44,6 +49,11 @@ public abstract class AbstractPowerUp : MonoBehaviour {
         }
     }
 
+    public float GetTimeLeft()
+    {
+        return endTime - Time.time;
+    }
+
     public bool IsActivated()
     {
         return activated;
@@ -52,8 +62,11 @@ public abstract class AbstractPowerUp : MonoBehaviour {
     public void CreateTarget(Transform thePostion)
     {
         targetTrigger.GetComponent<PowerupTarget>().source = this;
-        Instantiate(targetTrigger, thePostion.position, thePostion.rotation);
+        Instantiate(targetTrigger, thePostion.position + Vector3.up * thePostion.localScale.y, thePostion.rotation);
     }
+
+    //Updates when the powerup is running
+    protected abstract void PowerupUpdate();
 
     //Run when the powerup initially starts
     protected abstract void PowerUpStart();

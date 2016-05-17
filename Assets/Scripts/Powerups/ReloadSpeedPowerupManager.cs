@@ -27,4 +27,6 @@ public class ReloadSpeedPowerupManager : AbstractPowerUp
     {
         playerShooting.shotDelay = baseReloadTime;
     }
+
+    protected override void PowerupUpdate() { }
 }
