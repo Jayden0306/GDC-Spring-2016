@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class EnemyWaveController : MonoBehaviour {
     private Vector3[] spawnLocations;
@@ -15,11 +17,14 @@ public class EnemyWaveController : MonoBehaviour {
     public GameObject gameManager;
     private ScoreManager enemyCount;
 
-    private AudioSource waveStart; 
+    private AudioSource waveStart;
 
     private int currentDifficulty = 0;
 
     private EnemyWave activeWave;
+
+    public Text waveText;
+    private int waveCounter = 0;
 
 
     void Awake() {
@@ -48,11 +53,24 @@ public class EnemyWaveController : MonoBehaviour {
             if (activeWave == null) {
                 waveStart.PlayDelayed(0f);
                 activeWave = new EnemyWave(currentDifficulty, FocusPattern[currentFocus], enemyArray);
+                waveCounter++;
+                waveText.text = "WAVE " + waveCounter.ToString();
+                waveText.GetComponent<Animation>().Play();
             }  else {
                 GameObject newEnemy = activeWave.spawnEnemy();
+                int[] spawnedAt = new int[3];
+                for (int i = 0; i < spawnedAt.Length; i++)
+                    spawnedAt[i] = -1;
+                int curSpawn = 0;
                 while (newEnemy != null) {
-                    newEnemy.transform.position = spawnLocations[Random.Range(0, spawnLocations.Length) ];
+                    int newSpawn = -1;
+                    while (Array.IndexOf(spawnedAt, newSpawn) != -1) {
+                        newSpawn = UnityEngine.Random.Range(0, spawnLocations.Length);
+                    }
+                    spawnedAt[curSpawn] = newSpawn;
+                    newEnemy.transform.position = spawnLocations[spawnedAt[curSpawn]];
                     newEnemy = activeWave.spawnEnemy();
+                    curSpawn++;
                 }
             }
             if (!(activeWave.Update())) {

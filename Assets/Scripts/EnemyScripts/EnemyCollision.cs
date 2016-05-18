@@ -5,6 +5,7 @@ public class EnemyCollision : MonoBehaviour {
 
     public int enemyScore = 10;
     public float damageOnImpact = 10f;
+    public int myHP = 1;
 	public GameObject myExplosion;
     public GameObject gameManager;
 
@@ -30,15 +31,17 @@ public class EnemyCollision : MonoBehaviour {
         //if the object you are colliding with has the tag "Obst"
         //then you will destroy the current gameObject(i.e. the enemy that
         //collided with the obstacle.)
-        if (collision.gameObject.tag == "Bullet")
-        {
-			GameObject newExplosion = (GameObject)Instantiate (myExplosion, transform.position, transform.rotation);
-			Destroy (newExplosion, 0.3f);
-            AudioSource.PlayClipAtPoint(enemyDeathSound, this.transform.position);
-            scoreManager.AddScore(enemyScore);
-            powerupManager.EnemyDeath(transform);
-            scoreManager.AddEnemyCount(-1);
-            Destroy(this.gameObject);
+        if (collision.gameObject.tag == "Bullet") {
+            myHP--;
+            if (myHP <= 0) {
+                GameObject newExplosion = (GameObject)Instantiate(myExplosion, transform.position, transform.rotation);
+                Destroy(newExplosion, 0.3f);
+                AudioSource.PlayClipAtPoint(enemyDeathSound, this.transform.position);
+                scoreManager.AddScore(enemyScore);
+                powerupManager.EnemyDeath(transform);
+                scoreManager.AddEnemyCount(-1);
+                Destroy(this.gameObject);
+            }
         }
     }
 
