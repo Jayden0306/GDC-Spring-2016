@@ -27,7 +27,7 @@ public class PlayerShooting : MonoBehaviour {
     {
         canShoot = true;
         Cursor.lockState = CursorLockMode.Confined;
-        Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(cursorTexture, new Vector2(24, 24), CursorMode.Auto);
  
     }
 
