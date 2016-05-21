@@ -79,6 +79,8 @@ public class EnemyWave {
         if (currentSpawnTime <= 0) {
             currentSpawnTime = timeBetweenSpawns;
             curSpawns = numEnemiesPerSpawn;
+            if (curSpawns > getEnemiesRemaining())
+                curSpawns = getEnemiesRemaining();
         }
         if (getEnemiesRemaining() == 0)
             return false;
