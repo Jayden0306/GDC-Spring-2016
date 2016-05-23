@@ -55,8 +55,12 @@ public class EnemyWaveController : MonoBehaviour {
                 activeWave = new EnemyWave(currentDifficulty, FocusPattern[currentFocus], enemyArray);
                 waveCounter++;
                 waveText.text = "WAVE " + waveCounter.ToString();
-                waveText.GetComponent<Animation>().Play();
-            }  else {
+
+                //waveText.CrossFadeAlpha(0.0f, 5f, true);
+                //waveText.CrossFadeAlpha(1.0f, 5f, false);
+                waveText.GetComponent<Animator>().SetTrigger("Play");
+            }
+            else {
                 GameObject newEnemy = activeWave.spawnEnemy();
                 int[] spawnedAt = new int[3];
                 for (int i = 0; i < spawnedAt.Length; i++)
