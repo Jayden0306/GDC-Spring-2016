@@ -45,7 +45,7 @@ public abstract class AbstractPowerUp : MonoBehaviour {
             activated = true;
             endTime = Time.time + durration;
             PowerUpStart();
-
+            new PowerupTimer(targetTrigger.GetComponentInChildren<SpriteRenderer>().sprite, GetTimeLeft());
         }
     }
 
