@@ -21,5 +21,7 @@ public class HealthPowerup : AbstractPowerUp
 
     protected override void PowerUpStart() { }
 
-    protected override void PowerUpEnd() { }
+    protected override void PowerUpEnd() {
+        image.SetActive(IsActivated());
+    }
 }

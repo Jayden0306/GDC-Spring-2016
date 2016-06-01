@@ -26,6 +26,7 @@ public class ReloadSpeedPowerupManager : AbstractPowerUp
     protected override void PowerUpEnd()
     {
         playerShooting.shotDelay = baseReloadTime;
+        image.SetActive(IsActivated());
     }
 
     protected override void PowerupUpdate() { }

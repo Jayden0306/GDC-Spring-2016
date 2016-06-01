@@ -26,6 +26,7 @@ public class SpeedPowerupManager : AbstractPowerUp {
     protected override void PowerUpEnd()
     {
         movement.speed = baseMoveSpeed;
+        image.SetActive(IsActivated());
     }
     
     protected override void PowerupUpdate() { }

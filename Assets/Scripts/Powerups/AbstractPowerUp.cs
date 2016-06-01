@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public abstract class AbstractPowerUp : MonoBehaviour {
+
+    public GameObject image;
 
     public int durration;
     public GameObject targetTrigger;
@@ -45,7 +48,8 @@ public abstract class AbstractPowerUp : MonoBehaviour {
             activated = true;
             endTime = Time.time + durration;
             PowerUpStart();
-            new PowerupTimer(targetTrigger.GetComponentInChildren<SpriteRenderer>().sprite, GetTimeLeft());
+            image.GetComponent<Image>().sprite = targetTrigger.GetComponentInChildren<SpriteRenderer>().sprite;
+            image.SetActive(IsActivated());
         }
     }
 
