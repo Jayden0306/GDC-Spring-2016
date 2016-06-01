@@ -62,7 +62,6 @@ public class EnemyWaveController : MonoBehaviour {
             }
             else {
                 GameObject newEnemy = activeWave.spawnEnemy();
-                //newEnemy.transform.parent = transform;
                 int[] spawnedAt = new int[3];
                 for (int i = 0; i < spawnedAt.Length; i++)
                     spawnedAt[i] = -1;

@@ -24,7 +24,7 @@ public class EnemyWave {
         // Store internal copies inside the wave object.
         enemyArray = enemies;
 
-        GenerateWave(Difficulty, enemyFocus, 100 - Difficulty);
+        GenerateWave(Difficulty, enemyFocus);
     }
 
     public GameObject spawnEnemy() {
@@ -41,7 +41,7 @@ public class EnemyWave {
             return null;
     }
 
-    void GenerateWave(int Difficulty, int enemyFocus, int focusPercent) {
+    void GenerateWave(int Difficulty, int enemyFocus) {
         // Ratios as follows:
         //  80% focused
         //  Remained: Random between the others
@@ -49,20 +49,16 @@ public class EnemyWave {
         int enemyCount = totalEnemies = initialNumEnemies + Difficulty;
         numSpawns = new int[enemyArray.Length];
 
-        if (focusPercent < 50)
-            focusPercent = 50;
-
         while (enemyCount > 0) {
             for (int i = 0; i < enemyArray.Length; i++) {
                 float Percent = Random.Range(0.0f, 100f);
-                if (Percent <= focusPercent && i == enemyFocus) {
+                if (Percent < 80 && i == enemyFocus) {
                     numSpawns[i]++;
-                    enemyCount--;
-                } else if (Percent > focusPercent && i != enemyFocus) {
+                } else if (Percent >= 80 && i != enemyFocus) {
                     numSpawns[i]++;
-                    enemyCount--;
                 }
             }
+            enemyCount--;
         }
 
         numEnemiesPerSpawn = 1 + (int)(Difficulty / 3);
