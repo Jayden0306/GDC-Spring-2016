@@ -6,6 +6,7 @@ public class MenuAndPausing : MonoBehaviour
 
     private bool isOn;
     public GameObject menu;
+    public GameObject waveText;
     public GameObject shotSpawn;
     public PlayerShooting shooting;
 
@@ -22,6 +23,7 @@ public class MenuAndPausing : MonoBehaviour
         if (!isOn && Input.GetKeyDown(KeyCode.Escape))
         {
             isOn = true;
+            waveText.SetActive(false);
             shooting.SetCanShoot(false);
             shotSpawn.SetActive(false);
             menu.SetActive(true);
@@ -30,6 +32,7 @@ public class MenuAndPausing : MonoBehaviour
         else if (isOn && Input.GetKeyDown(KeyCode.Escape))
         {
             isOn = false;
+            waveText.SetActive(true);
             shooting.SetCanShoot(true);
             shotSpawn.SetActive(true);
             menu.SetActive(false);
