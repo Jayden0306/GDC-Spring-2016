@@ -1,38 +1,42 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
 
 public class MenuAndPausing : MonoBehaviour
 {
 
     private bool isOn;
+    private bool canUse;
+
     public GameObject menu;
     public GameObject waveText;
     public GameObject shotSpawn;
+
+    public Text menuText;
+
     public PlayerShooting shooting;
 
     // Use this for initialization
     void Start()
     {
         isOn = false;
+        canUse = true;
         Time.timeScale = 1.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isOn && Input.GetKeyDown(KeyCode.Escape))
+        if (canUse && !isOn && Input.GetKeyDown(KeyCode.Escape))
         {
             isOn = true;
-            waveText.SetActive(false);
             shooting.SetCanShoot(false);
             shotSpawn.SetActive(false);
             menu.SetActive(true);
             Time.timeScale = 0f;
         }
-        else if (isOn && Input.GetKeyDown(KeyCode.Escape))
+        else if (canUse && isOn && Input.GetKeyDown(KeyCode.Escape))
         {
             isOn = false;
-            waveText.SetActive(true);
             shooting.SetCanShoot(true);
             shotSpawn.SetActive(true);
             menu.SetActive(false);
@@ -40,4 +44,14 @@ public class MenuAndPausing : MonoBehaviour
         }
     }
 
+    public void GameOver()
+    {
+        canUse = false;
+        waveText.SetActive(false);
+        shooting.SetCanShoot(false);
+        shotSpawn.SetActive(false);
+        menu.SetActive(true);
+        menuText.text = "Game Over";
+        Time.timeScale = 0f;
+    }
 }
