@@ -6,6 +6,8 @@ public class PlayerHealth : MonoBehaviour {
     private float maxHealth = 100f;
     private float currentHealth = 0f;
 
+    public MenuAndPausing gameOver;
+
     public AudioClip takeDamage;
     public GameObject healthBar;
 
@@ -24,6 +26,10 @@ public class PlayerHealth : MonoBehaviour {
         currentHealth -= damageTaken;
         AudioSource.PlayClipAtPoint(takeDamage, this.transform.position);
         UpdateHealthBar();
+        if (currentHealth <= 0)
+        {
+            gameOver.GameOver();
+        }
 
         Debug.Log(currentHealth);
     }
