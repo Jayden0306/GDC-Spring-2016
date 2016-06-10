@@ -75,7 +75,7 @@ public class EnemyWave {
             timeBetweenSpawns -= (numEnemiesPerSpawn - 3) * .05f;
             numEnemiesPerSpawn = 3;
         }
-        Debug.Log(Difficulty.ToString() + ":" + timeBetweenSpawns.ToString());
+        //Debug.Log(Difficulty.ToString() + ":" + timeBetweenSpawns.ToString());
     }
 
     public bool Update() {
